@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TEST</title>
+    <link href="./css/main.css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<style>
+button {
+    width: 100px;
+    height: 100px;
+}
+</style>
+</head>
+<body>
+<script>
+    function reset(){
+        $.ajax({
+             url:'http://'+ location.hostname +':8080/api/1/reset',
+             dataType: 'jsonp',
+             success:function(json){
+                 console.log("Success");
+             },
+             error:function(){
+                 console.log("Error");
+             }      
+        });
+    }
+    function next(){
+        $.ajax({
+             url:'http://'+ location.hostname +':8080/api/1/next',
+             dataType: 'jsonp',
+             success:function(json){
+                 console.log("Success");
+             },
+             error:function(){
+                 console.log("Error");
+             }      
+        });
+    }
+</script>
+<button onclick="reset();">Reset</button>
+<button onclick="next();">Next</button>
+</body>
+</html>
