@@ -24,3 +24,8 @@ Temporary Items
 .apdisk
 
 *.xdk*
+
+node_modules/
+*.sublime-project
+*.sublime-workspace
+

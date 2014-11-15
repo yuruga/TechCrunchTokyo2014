@@ -4,7 +4,7 @@ var app = require('http').createServer(function handler (req, res) {
 	var urlinfo = require('url').parse( req.url , true);
 	if(urlinfo.pathname.match(/\/tmp\/[a-z0-9_]+\.wav$/)){
 		path = urlinfo.pathname;
-	}else if(urlinfo.pathname.match(/\.(html|js|css)$/)){
+	}else if(urlinfo.pathname.match(/\.(html|js|css|jpg|png|gif)$/)){
 		path = __dirname + '/../www' + urlinfo.pathname;
 	}else{
 		path = __dirname + '/../www/index.html';
