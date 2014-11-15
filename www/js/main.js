@@ -6,6 +6,9 @@ var opt = {
     }
 var socket = io.connect(":8100", opt);
 var player = document.getElementById("audio");
+player.addEventListener('ended', function(e){
+    socket.emit('finish');
+});
 
 socket.on('connect', function(e){
     console.log('connect');
@@ -32,9 +35,7 @@ socket.on('play', function(e){
     player.onerror = function(e){
         console.log("error", e);
     };
-    player.ended = function(e){
-            socket.emit("finish");
-        };
+    
     player.load();
 
     //play face
