@@ -1,0 +1,19 @@
+html, body {
+  height: 100%;
+  width: 100%; }
+
+#audio {
+  visibility: hidden; }
+
+@-webkit-keyframes "anim1" {
+  0% {
+    background-position: 0px 0; }
+
+  100% {
+    background-position: -318px 0; } }
+
+.anim1 {
+  background: url('../img/images.jpg');
+  width: 79.5px;
+  height: 80px;
+  -webkit-animation: "anim1" 0.33333s steps(4) infinite; }
