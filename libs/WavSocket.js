@@ -27,29 +27,30 @@ var fs = require('fs');
 //コンストラクタ
 var WavSocket = function(port){
 	//インスタンスプロパティ
-	this.socket = "value";
-	
+	this.socket = null;
+    var _callback = null;
 	app.listen(port);
-	
 	io.on('connection', function (socket) {
-			this.socket = socket;
-			socket.emit('news', { hello: 'world' });
-			socket.on('my other event', function (data) {
-			console.log(data);
-		});
+        this.socket = socket;
+        socket.on('finish', function (data) {
+            if(_callback){
+                _callback();
+            }
+        });
 	});
+    this.setCallBack = function(callback){
+		_callback = callback;
+	}
 }
 //クラスプロパティ
-WavSocket.sample_class_prop = "value";
+//WavSocket.sample_class_prop = "value";
 //インスタンスメソッド
 WavSocket.prototype = {
-	emmitPlay: function(path){
-		var obj = {
-			path: path
-		}
+	emmitPlay: function(obj){
 		io.emit("play", obj);
 	}
 };
+
 
 //export
 module.exports = WavSocket;

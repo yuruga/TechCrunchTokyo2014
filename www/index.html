@@ -16,5 +16,40 @@
 <button onClick="playFaceAnim('angry');">anim3</button>
 <button onClick="playFaceAnim('joy');">anim3</button>
 </div>
+<!--
+<script>
+    var opt = {
+        forceNew: true,
+        reconnection: false
+    }
+    var socket = io.connect(":8100", opt);
+    var player = document.getElementById("audio");
+    player.addEventListener("ended", function(e){
+        console.log("ABCDEF");
+        socket.emit("finish");
+    });
+    socket.on('connect', function(e){
+        console.log('connect');
+    });
+    socket.on('connect', function(e){
+        console.log('connect');
+    });
+    socket.on('play', function(e){
+        console.log(e);
+        player.src = e.path;
+        player.onload = function(e){
+            console.log("success", e);
+            player.play();
+        };
+        player.onerror = function(e){
+            console.log("error", e);
+        };
+        player.ended = function(e){
+            socket.emit("finish");
+        };
+        player.load();
+    });
+</script>
+-->
 </body>
 </html>
