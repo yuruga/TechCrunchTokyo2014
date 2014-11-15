@@ -1,4 +1,5 @@
 var map = ["normal","angry","joy","sad"];
+var dummyAudioExp = /empty.wav/;
 //socket init
 var opt = {
         forceNew: true,
@@ -7,7 +8,9 @@ var opt = {
 var socket = io.connect(":8100", opt);
 var player = document.getElementById("audio");
 player.addEventListener('ended', function(e){
-    socket.emit('finish');
+    if(!dummyAudioExp.test(e.target.src)){
+        socket.emit('finish');
+    }
 });
 player.addEventListener('play', function(e){
     e.target.style.visibility = "hidden";
@@ -44,7 +47,7 @@ socket.on('play', function(e){
     player.load();
 
     //play face
-    face.className = animId;
+    face.className = map[animId];;
 
 
 
