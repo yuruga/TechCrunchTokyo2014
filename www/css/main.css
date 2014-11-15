@@ -5,10 +5,10 @@ body {
   position: absolute;
   bottom: 0; }
 
-/*
 #audio {
-  visibility: hidden; }
-*/
+  position: absolute;
+  top:0;
+  left:0; }
 
 #face {
   transform-origin: 0 0;

@@ -1,4 +1,4 @@
-
+var map = ["normal","angry","joy","sad"];
 //socket init
 var opt = {
         forceNew: true,
@@ -8,6 +8,11 @@ var socket = io.connect(":8100", opt);
 var player = document.getElementById("audio");
 player.addEventListener('ended', function(e){
     socket.emit('finish');
+});
+player.addEventListener('play', function(e){
+    e.target.style.visibility = "hidden";
+    e.target.setAttribute("autoplay",true);
+    e.target.removeEventListener('play', arguments.callee );
 });
 
 socket.on('connect', function(e){
@@ -50,7 +55,7 @@ function playFaceAnim(animId){
    /* face.addEventListener('webkitAnimationEnd', function(){
         this.style.webkitAnimationName = '';
     }, false);*/
-    face.className = animId;
+    face.className = map[animId];
     onResize();
 }
 
@@ -60,6 +65,11 @@ var FRAME_WIDTH = 2043;
 function onResize(e){
     var face = document.getElementById("face");
     p = window.outerWidth/FRAME_WIDTH;
-    console.log("aaa",window.width,window);
     face.style["transform"] = "scale("+p+")";
 }
+
+playFaceAnim(0);
+
+
+
+
