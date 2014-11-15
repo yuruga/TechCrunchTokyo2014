@@ -56,7 +56,11 @@ http.createServer(function (req, res) {
                 {
                     "text": "そなあほなー",
                     "type": 3
-                }    
+                },
+                {
+                    "text": "ぴっぽー",
+                    "type": 4
+                }   
             ];
             res.end(JSON.stringify(obj[Math.floor(Math.random()*obj.length)]));
             break;
