@@ -13,6 +13,11 @@
         reconnection: false
     }
     var socket = io.connect(":8100", opt);
+    var player = document.getElementById("audio");
+    player.addEventListener("ended", function(e){
+        console.log("ABCDEF");
+        socket.emit("finish");
+    });
     socket.on('connect', function(e){
         console.log('connect');
     });
@@ -21,17 +26,6 @@
     });
     socket.on('play', function(e){
         console.log(e);
-        /*
-        var audio = new Audio(e.path);
-        audio.onload = function(e){
-            console.log("success", e);
-            audio.play();
-        };
-        audio.onerror = function(e){
-            console.log("error", e);
-        };
-        */
-        var player = document.getElementById("audio");
         player.src = e.path;
         player.onload = function(e){
             console.log("success", e);
@@ -40,8 +34,10 @@
         player.onerror = function(e){
             console.log("error", e);
         };
+        player.ended = function(e){
+            socket.emit("finish");
+        };
         player.load();
-
     });
 </script>
 </body>
