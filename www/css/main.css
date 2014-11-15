@@ -1,19 +1,45 @@
-html, body {
-  height: 100%;
-  width: 100%; }
+body {
+  overflow: hidden; }
+
+#debug {
+  position: absolute;
+  bottom: 0; }
 
 #audio {
   visibility: hidden; }
 
-@-webkit-keyframes "anim1" {
+#face {
+  transform-origin: 0 0;
+  /*  width:100%;
+	height:100%; */ }
+
+@-webkit-keyframes "animation" {
   0% {
     background-position: 0px 0; }
 
   100% {
-    background-position: -318px 0; } }
+    background-position: -4086px 0; } }
 
-.anim1 {
-  background: url('../img/images.jpg');
-  width: 79.5px;
-  height: 80px;
-  -webkit-animation: "anim1" 0.33333s steps(4) infinite; }
+.normal {
+  background: url('../img/normal.png');
+  width: 2043px;
+  height: 2043px;
+  -webkit-animation: "animation" 2s steps(2) infinite; }
+
+.sad {
+  background: url('../img/sad.png');
+  width: 2043px;
+  height: 2043px;
+  -webkit-animation: "animation" 2s steps(2) infinite; }
+
+.angry {
+  background: url('../img/angry.png');
+  width: 2043px;
+  height: 2043px;
+  -webkit-animation: "animation" 2s steps(2) infinite; }
+
+.joy {
+  background: url('../img/joy.png');
+  width: 2043px;
+  height: 2043px;
+  -webkit-animation: "animation" 2s steps(2) infinite; }
