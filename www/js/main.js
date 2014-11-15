@@ -5,6 +5,8 @@ var opt = {
         reconnection: false
     }
 var socket = io.connect(":8100", opt);
+var player = document.getElementById("audio");
+
 socket.on('connect', function(e){
     console.log('connect');
 });
@@ -14,7 +16,6 @@ socket.on('connect', function(e){
 socket.on('play', function(e){
     console.log(e);
     var face = document.getElementById("face");
-    var player = document.getElementById("audio");
     //
     animId = e.mode;
     audioPath = e.path;
@@ -31,6 +32,9 @@ socket.on('play', function(e){
     player.onerror = function(e){
         console.log("error", e);
     };
+    player.ended = function(e){
+            socket.emit("finish");
+        };
     player.load();
 
     //play face

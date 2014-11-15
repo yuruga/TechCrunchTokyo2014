@@ -5,51 +5,18 @@
     <title>TEST</title>
     <link href="./css/main.css" rel="stylesheet" />
     <script src="./js/socket.io.js"></script>
-    <script src="./js/main.js"></script>
+    
 </head>
 <body>
-<div id="face">aaa</div>
+<div id="face"></div>
 <audio id="audio" controls autoplay></audio>
 <div id="debug">
 <button onClick="playFaceAnim('normal');">anim1</button>
 <button onClick="playFaceAnim('sad');">anim2</button>
 <button onClick="playFaceAnim('angry');">anim3</button>
 <button onClick="playFaceAnim('joy');">anim3</button>
+<script src="./js/main.js"></script>
 </div>
-<!--
-<script>
-    var opt = {
-        forceNew: true,
-        reconnection: false
-    }
-    var socket = io.connect(":8100", opt);
-    var player = document.getElementById("audio");
-    player.addEventListener("ended", function(e){
-        console.log("ABCDEF");
-        socket.emit("finish");
-    });
-    socket.on('connect', function(e){
-        console.log('connect');
-    });
-    socket.on('connect', function(e){
-        console.log('connect');
-    });
-    socket.on('play', function(e){
-        console.log(e);
-        player.src = e.path;
-        player.onload = function(e){
-            console.log("success", e);
-            player.play();
-        };
-        player.onerror = function(e){
-            console.log("error", e);
-        };
-        player.ended = function(e){
-            socket.emit("finish");
-        };
-        player.load();
-    });
-</script>
--->
+
 </body>
 </html>
