@@ -44,19 +44,19 @@ body{overflow:hidden}
 
 .normal
 {
-	@include animation("animation",  4086px, 2043px, 2,  url('../img/normal.png'),1);
+	@include animation("animation",  4086px, 2043px, 2,  url('../img/normal.png'),1.5);
 }
 .sad
 {
-	@include animation("animation",  4086px, 2043px, 2,  url('../img/sad.png'),1);
+	@include animation("animation",  4086px, 2043px, 2,  url('../img/sad.png'),1.5);
 }
 .angry
 {
-	@include animation("animation",  4086px, 2043px, 2,  url('../img/angry.png'),1);
+	@include animation("animation",  4086px, 2043px, 2,  url('../img/angry.png'),1.5);
 }
 .joy
 {
-	@include animation("animation",  4086px, 2043px, 2,  url('../img/joy.png'),1);
+	@include animation("animation",  4086px, 2043px, 2,  url('../img/joy.png'),1.5);
 }
 
 
