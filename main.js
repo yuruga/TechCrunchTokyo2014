@@ -121,6 +121,12 @@ var Settings = {
             text: "来年は、足を再開発してマラソンの完走を目指しているから無理かなー"
         }
     ],
+    news: {
+        man: [MAN1],
+        mode: 0,
+        type: 1,
+        text: ""
+    },
     queue: []
 }
 
@@ -133,6 +139,7 @@ var http = require('http');
 var exec = require('child_process').exec;
 var Voice = require("./libs/VoiceService.js");
 var WavSocket = require('./libs/WavSocket.js');
+var AsahiApi = require('./libs/AsahiApi.js');
 var os = require("os");
 
 /**
@@ -144,11 +151,11 @@ function nextScene(){
     if(Settings.phase < Settings.scene.length){
         var obj = Settings.scene[Settings.phase++];
         if(obj.man.indexOf(MAN1) > -1){
-            console.log("MAN1");
+            console.log("MAN1", obj);
             Settings.queue.push(obj);
         }
         if(obj.man.indexOf(MAN2) > -1){
-            console.log("MAN2");
+            console.log("MAN2", obj);
             var v = new Voice();
             v.setText(obj.text);
             v.getAndWriteData("/tmp/read_" + (new Date()).getTime().toString() + ".wav", function(path){
@@ -170,18 +177,18 @@ http.createServer(function (req, res) {
         nextScene();
     });
 	switch(urlinfo.pathname){
-		case '/read':
-			if("w" in urlinfo.query){
-				var v = new Voice();
-				v.setText(urlinfo.query.w);
-				v.getAndWriteData("/tmp/read_" + (new Date()).getTime().toString() + ".wav", function(path){
-					ws.emmitPlay({
-                        path: path
-                    });
-				});
-			}
-			res.end('/Read\n');
-			break;
+//		case '/read':
+//			if("w" in urlinfo.query){
+//				var v = new Voice();
+//				v.setText(urlinfo.query.w);
+//				v.getAndWriteData("/tmp/read_" + (new Date()).getTime().toString() + ".wav", function(path){
+//					ws.emmitPlay({
+//                        path: path
+//                    });
+//				});
+//			}
+//			res.end('/Read\n');
+//			break;
         case '/api/1/pepper':
             var obj = {
                 man: [MAN1],
@@ -191,6 +198,8 @@ http.createServer(function (req, res) {
             }
             if(Settings.queue.length > 0){
                 obj = Settings.queue.shift();
+            }else if(Settings.scene.length <= Settings.phase){
+                obj.mode = 2;
             }
             res.end(JSON.stringify(obj));
             break;
@@ -205,8 +214,14 @@ http.createServer(function (req, res) {
             break;
         case '/api/1/news_queue':
             var keyword = urlinfo.query.w;
-            //TODO:
-            var text = "新聞記事";
+            var a = new AsahiApi();
+            a.getBody(keyword, function(text){
+                if(text == null){
+                    text = "あー、取得できなかったわー";
+                }
+                Settings.news.text = text;
+                Settings.queue.push(Settings.news);
+            });
             res.end('added queue');
             break;
 		default:
