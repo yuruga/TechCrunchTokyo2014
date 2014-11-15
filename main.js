@@ -158,8 +158,9 @@ function nextScene(){
             console.log("MAN2", obj);
             var v = new Voice();
             v.setText(obj.text);
-            v.getAndWriteData("/tmp/read_" + (new Date()).getTime().toString() + ".wav", function(path){
-                obj.path = path;
+            var soundUri = "/wav/read_" + (new Date()).getTime().toString() + ".wav";
+            v.getAndWriteData(__dirname + "/www" + soundUri, function(path){
+                obj.path = soundUri;
                 ws.emmitPlay(obj);
             });
         }

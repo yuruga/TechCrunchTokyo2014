@@ -10,7 +10,8 @@
     "request": "*",
     "querystring": "*",
     "wav": "*",
-    "socket.io": "*"
+    "socket.io": "*",
+    "express": "*"
   },
   "devDependencies": {}
 }
