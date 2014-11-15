@@ -10,11 +10,9 @@ var Settings = {
  * require
  */
 var http = require('http');
-var mraa = require('mraa');
+//var mraa = require('mraa');
 var exec = require('child_process').exec;
 var Voice = require("./libs/VoiceService.js");
-var Player = require("./libs/WavPlayer.js");
-var CarService = require('./libs/CarService');
 var WavSocket = require('./libs/WavSocket.js');
 var os = require("os");
 
@@ -45,105 +43,26 @@ http.createServer(function (req, res) {
 			}
 			res.end('/Read\n');
 			break;
-		case '/cars':
-			var car = new CarService(80);
-			car._fetchCarData2(function(val){
-				res.end(val);
-			})
-			break;
+        case '/api/1/pepper':
+            var obj = [
+                {
+                    "text": "あいうえおかきくけこ",
+                    "type": 1
+                },
+                {
+                    "text": "なんでやねん",
+                    "type": 2
+                },
+                {
+                    "text": "そなあほなー",
+                    "type": 3
+                }    
+            ];
+            res.end(JSON.stringify(obj[Math.floor(Math.random()*obj.length)]));
+            break;
 		default:
 			res.end('empty\n');
 	}
 }).listen(8080);
 
 
-
-
-
-
-var pin6 = new mraa.Gpio(6);
-var car = new CarService(80);
-
-var led = new mraa.Gpio(8);
-var led_val = 0;
-var led_bool = false;
-var child;
-led.dir(mraa.DIR_OUT);
-led.write(led_val);
-
-
-//pinモード設定
-pin6.dir(mraa.DIR_IN);
-//送信フラグ
-var is_press = false;
-var n = 0;
-//入力監視
-function loop() {
-	if(led_bool){
-		led_val ^= 1;
-		led.write(led_val);
-	}else{
-		led.write(0);
-	}
-	
-	
- if(pin6.read()){
-      if(!is_press){
-          console.log("hhhhh");
-          n++;
-          //car.setCarId(n);
-          m = car.getCarData();
-      }
-      is_press = true;
-      
- }else{
-  is_press = false;
- }
-if(car.event && os.hostname() == "Edison-MAEDA"){
-	//car.event.excute();
-	console.log("EVENT!");
-	led_bool = true;
-	child = exec('killall sketch.elf', function(err, stdout, stderr) {});
-	child = exec('/sketch/sketch.elf /dev/pts/0', function(err, stdout, stderr) {});
-	car.event.voice.getAndWriteData("/tmp/read_" + (new Date()).getTime().toString() + ".wav", function(path){
-		console.log(path);
-		ws.emmitPlay(path);
-		led_bool = false;
-	});
-	car.event = null;
-}
- //遅延実行
- setTimeout(loop, 500);
-}
-//初回実行
-loop();
-
-
-/*
-//pin指定
-var pin6 = new mraa.Gpio(6);
-//pinモード設定
-pin6.dir(mraa.DIR_IN);
-//送信フラグ
-var is_press = false;
-//入力監視
-function loop() {
-	if(pin6.read()){
-		if(!is_press){
-			var v = new Voice();
-			v.setText("こんにちはああああああああ、きたー");
-			v.getAndWriteData("/tmp/read_" + (new Date()).getTime().toString() + ".wav", function(path){
-				console.log(path);
-				ws.emmitPlay(path);
-			});
-		}
-		is_press = true;
-	}else{
-		is_press = false;
-	}
-	//遅延実行
-	setTimeout(loop, 100);
-}
-//初回実行
-loop();
-*/
