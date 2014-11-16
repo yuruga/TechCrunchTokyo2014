@@ -10,7 +10,8 @@ var Settings = {
             man: [MAN1],
             mode: 0,
             type: 1,
-            text: "わー こんばんはー",
+            text: "わー　こんばんはー",
+            index:1,
             phase: -1
         },
         {
@@ -18,6 +19,7 @@ var Settings = {
             mode: 0,
             type: 1,
             text: "僕達ペッパーズでーす　宜しくお願いしまーす！",
+            index:2,
             phase: -1
         },
         {
@@ -25,6 +27,7 @@ var Settings = {
             mode: 0,
             type: 1,
             text: "僕が可愛いおちゃめなペッパーで　横にいるやらしそうなクマがガーリックです。",
+            index:3,
             phase: -1
         },
         {
@@ -32,6 +35,7 @@ var Settings = {
             mode: 1,
             type: 1,
             text: "おい　ペッパー",
+            index:0,
             phase: -1
         },
         {
@@ -39,6 +43,7 @@ var Settings = {
             mode: 0,
             type: 1,
             text: "実はさー昨日僕達ハッカソンに参加してきたんだよね",
+            index:5,
             phase: -1
         },
         {
@@ -46,6 +51,7 @@ var Settings = {
             mode: 3,
             type: 1,
             text: "マジでしんどかったわ。朝5時くらいのみんなの死んだサケのような目忘れられないわー　",
+            index:0,
             phase: -1
         },
         {
@@ -53,6 +59,7 @@ var Settings = {
             mode: 0,
             type: 1,
             text: "みんな充血してこんな目だったよね！",
+            index:7,
             phase: -1
         },
         {
@@ -60,6 +67,7 @@ var Settings = {
             mode: 0,
             type: 1,
             text: "そういえばガーリック何作ったの？",
+            index:8,
             phase: -1
         },
         {
@@ -67,13 +75,15 @@ var Settings = {
             mode: 0,
             type: 1,
             text: "離婚を再開発して　簡単に離婚できるような仕組み作ったよー　俺バツ３だから前からそうしたかったんだよね",
+            index:0,
             phase: -1
         },
         {
             man: [MAN1],
             mode: 0,
             type: 1,
-            text: "イノベーションやわー",
+            text: "めっちゃイノベーションやわー",
+            index:10,
             phase: -1
         },
         {
@@ -81,6 +91,7 @@ var Settings = {
             mode: 0,
             type: 1,
             text: "そういうペッパーは何作ったの？",
+            index:0,
             phase: -1
         },
         {
@@ -88,6 +99,7 @@ var Settings = {
             mode: 0,
             type: 1,
             text: "僕　自分を再開発して　朝日新聞の記事を自由に操れるようになったんだよ。今自慢してもいい？",
+            index:12,
             phase: -1
         },
         {
@@ -95,6 +107,7 @@ var Settings = {
             mode: 0,
             type: 1,
             text: "マジか　せっかくだから会場の人に興味ある記事選んでもらえば？",
+            index:0,
             phase: -1
         },
         {
@@ -102,6 +115,7 @@ var Settings = {
             mode: 0,
             type: 1,
             text: "それ、いいね。　会場のどなたか選んでください。",
+            index:14,
             phase: -1
         },
         {
@@ -109,6 +123,15 @@ var Settings = {
             mode: 1,
             type: 1,
             text: "",
+            index:15,
+            phase: -1
+        },
+        {
+            man: [MAN1],
+            mode: 1,
+            type: 1,
+            text: "",
+            index:17,
             phase: -1
         },
         {
@@ -116,6 +139,7 @@ var Settings = {
             mode: 1,
             type: 1,
             text: "はえーよ！",
+            index:0,
             phase: -1
         },
         {
@@ -123,6 +147,7 @@ var Settings = {
             mode: 0,
             type: 1,
             text: "なんでやねん！　イノベーションやろ",
+            index:19,
             phase: -1
         },
         {
@@ -130,6 +155,7 @@ var Settings = {
             mode: 0,
             type: 1,
             text: "ところで来年もハッカソン参加したいと思う？",
+            index:0,
             phase: -1
         },
         {
@@ -137,6 +163,15 @@ var Settings = {
             mode: 0,
             type: 1,
             text: "来年は、足を再開発してマラソンの完走を目指しているから無理かなー",
+            index:21,
+            phase: -1
+        },
+        {
+            man: [MAN1],
+            mode: 0,
+            type: 1,
+            text: "",
+            index:23,
             phase: -1
         }
     ],
@@ -147,7 +182,13 @@ var Settings = {
         text: "",
         phase: -1
     },
-    queue: []
+    queue: [],
+    search_keys:[
+        "野球",
+        "サッカー",
+        "フェンシング",
+        "水球"
+    ]
 }
 
 
@@ -182,6 +223,7 @@ function nextScene(phase){
                 var v = new Voice();
                 v.setText(obj.text);
                 v.setSpeaker(Voice.speaker.BEAR);
+                v.setSpeed(125);
                 var soundUri = "/wav/read_" + (new Date()).getTime().toString() + ".wav";
                 v.getAndWriteData(__dirname + "/www" + soundUri, function(path){
                     obj.path = soundUri;
@@ -226,7 +268,7 @@ http.createServer(function (req, res) {
             }
             if(Settings.queue.length > 0){
                 obj = Settings.queue.shift();
-            }else if(Settings.scene.length <= Settings.phase){
+            }else if(Settings.scene.length - 1 <= Settings.phase){
                 obj.mode = 2;
             }
             res.end(JSON.stringify(obj));
@@ -246,9 +288,11 @@ http.createServer(function (req, res) {
             res.end('["reset"]');
             break;
         case '/api/1/news_queue':
-            var keyword = urlinfo.query.w;
+            var index = urlinfo.query.w;
+            index = parseInt(index, 10) || 0;
+            index = Math.max(Math.min(index, search_keys.length-1), 0);
             var a = new AsahiApi();
-            a.getBody(keyword, function(text){
+            a.getBody(search_keys[index], function(text){
                 if(text == null){
                     text = "あー、取得できなかったわー";
                 }
