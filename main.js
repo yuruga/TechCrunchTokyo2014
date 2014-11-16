@@ -275,8 +275,12 @@ http.createServer(function (req, res) {
             break;
         case '/api/1/next':
             var phase = urlinfo.query.p;
+            var p = Math.max(Settings.phase - 1, 0);
             nextScene(phase);
-            res.end('["next"]');
+            console.log("NEXT:", phase, p);
+            res.end(JSON.stringify({
+                phase: p
+            }));
             break;
         case '/api/1/next_hard':
             nextScene(Settings.phase);
