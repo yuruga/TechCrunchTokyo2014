@@ -24,13 +24,19 @@ body{overflow:hidden}
 	bottom:0;
 }
 #audio{
-	visibility:hidden;
+	/* visibility:hidden; */
+	position:absolute;
+	top:0;
+	left:0;
 }
 #face{
 	transform-origin:0 0;
 	/*  width:100%;
 	height:100%; */
 	//background:#f0f;
+}
+#preload{
+	display:none;
 }
 
 
@@ -40,6 +46,14 @@ body{overflow:hidden}
 	0% { background-position:    0px 0; } 
     100% { background-position: -4086px 0; }
 }
+
+.stop
+{
+	background-position:    0px 0;
+	@include animation("",  4086px, 2043px, 2,  url('../img/normal.png'),1.5);
+
+}
+
 
 
 .normal

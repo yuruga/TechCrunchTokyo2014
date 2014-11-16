@@ -8,6 +8,10 @@ var opt = {
 var socket = io.connect(":8100", opt);
 var player = document.getElementById("audio");
 player.addEventListener('ended', function(e){
+
+
+    //addClass(face,"stop");
+    face.className = "stop";
     if(!dummyAudioExp.test(e.target.src)){
         socket.emit('finish', currentPhase);
     }
@@ -48,7 +52,7 @@ socket.on('play', function(e){
     player.load();
 
     //play face
-    face.className = map[animId];;
+    face.className = map[animId];
 
 
 
@@ -73,6 +77,19 @@ function onResize(e){
 }
 
 playFaceAnim(0);
+
+function addClass(target, className)
+{
+    console.log("ssss", className);
+    var existing = face.className;
+    face.className = existing + " " +className;
+}
+
+function removeClass(target, className)
+{
+    var existing = face.className;
+    face.className = existing.replace(className, "");
+}
 
 
 
