@@ -44,13 +44,13 @@ body{overflow:hidden}
 @include keyframes("animation")
 {
 	0% { background-position:    0px 0; } 
-    100% { background-position: -4086px 0; }
+    100% { background-position: -8172px 0; }
 }
 
 .stop
 {
 	background-position:    0px 0;
-	@include animation("",  4086px, 2043px, 2,  url('../img/normal.png'),1.5);
+	@include animation("",  8172px, 2043px, 2,  url('../img/normal.png'),10);
 
 }
 
@@ -58,19 +58,19 @@ body{overflow:hidden}
 
 .normal
 {
-	@include animation("animation",  4086px, 2043px, 2,  url('../img/normal.png'),1.5);
+	@include animation("animation",  8172px, 2043px, 4,  url('../img/normal.png'),10);
 }
 .sad
 {
-	@include animation("animation",  4086px, 2043px, 2,  url('../img/sad.png'),1.5);
+	@include animation("animation",  8172px, 2043px, 4,  url('../img/sad.png'),10);
 }
 .angry
 {
-	@include animation("animation",  4086px, 2043px, 2,  url('../img/angry.png'),1.5);
+	@include animation("animation",  8172px, 2043px, 4,  url('../img/angry.png'),10);
 }
 .joy
 {
-	@include animation("animation",  4086px, 2043px, 2,  url('../img/joy.png'),1.5);
+	@include animation("animation",  8172px, 2043px, 4,  url('../img/joy.png'),10);
 }
 
 

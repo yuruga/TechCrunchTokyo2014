@@ -24,35 +24,35 @@ body {
     background-position: 0px 0; }
 
   100% {
-    background-position: -4086px 0; } }
+    background-position: -8172px 0; } }
 
 .stop {
   background-position: 0px 0;
   background: url('../img/normal.png');
-  width: 2043px;
+  width: 4086px;
   height: 2043px;
-  -webkit-animation: "" 1.33333s steps(2) infinite; }
+  -webkit-animation: "" 0.2s steps(2) infinite; }
 
 .normal {
   background: url('../img/normal.png');
   width: 2043px;
   height: 2043px;
-  -webkit-animation: "animation" 1.33333s steps(2) infinite; }
+  -webkit-animation: "animation" 0.4s steps(4) infinite; }
 
 .sad {
   background: url('../img/sad.png');
   width: 2043px;
   height: 2043px;
-  -webkit-animation: "animation" 1.33333s steps(2) infinite; }
+  -webkit-animation: "animation" 0.4s steps(4) infinite; }
 
 .angry {
   background: url('../img/angry.png');
   width: 2043px;
   height: 2043px;
-  -webkit-animation: "animation" 1.33333s steps(2) infinite; }
+  -webkit-animation: "animation" 0.4s steps(4) infinite; }
 
 .joy {
   background: url('../img/joy.png');
   width: 2043px;
   height: 2043px;
-  -webkit-animation: "animation" 1.33333s steps(2) infinite; }
+  -webkit-animation: "animation" 0.4s steps(4) infinite; }
