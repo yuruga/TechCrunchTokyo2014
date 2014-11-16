@@ -6,9 +6,7 @@ body {
   bottom: 0; }
 
 #audio {
-  position: absolute;
-  top:0;
-  left:0; }
+  visibility: hidden; }
 
 #face {
   transform-origin: 0 0;
@@ -26,22 +24,22 @@ body {
   background: url('../img/normal.png');
   width: 2043px;
   height: 2043px;
-  -webkit-animation: "animation" 2s steps(2) infinite; }
+  -webkit-animation: "animation" 1.33333s steps(2) infinite; }
 
 .sad {
   background: url('../img/sad.png');
   width: 2043px;
   height: 2043px;
-  -webkit-animation: "animation" 2s steps(2) infinite; }
+  -webkit-animation: "animation" 1.33333s steps(2) infinite; }
 
 .angry {
   background: url('../img/angry.png');
   width: 2043px;
   height: 2043px;
-  -webkit-animation: "animation" 2s steps(2) infinite; }
+  -webkit-animation: "animation" 1.33333s steps(2) infinite; }
 
 .joy {
   background: url('../img/joy.png');
   width: 2043px;
   height: 2043px;
-  -webkit-animation: "animation" 2s steps(2) infinite; }
+  -webkit-animation: "animation" 1.33333s steps(2) infinite; }
