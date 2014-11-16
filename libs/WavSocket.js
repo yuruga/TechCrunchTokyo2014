@@ -54,9 +54,9 @@ var WavSocket = function(port){
 //	app.listen(port);
 	io.on('connection', function (socket) {
         this.socket = socket;
-        socket.on('finish', function (data) {
+        socket.on('finish', function (phase) {
             if(_callback){
-                _callback();
+                _callback(phase);
             }
         });
 	});

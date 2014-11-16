@@ -9,7 +9,7 @@ var socket = io.connect(":8100", opt);
 var player = document.getElementById("audio");
 player.addEventListener('ended', function(e){
     if(!dummyAudioExp.test(e.target.src)){
-        socket.emit('finish');
+        socket.emit('finish', currentPhase);
     }
 });
 player.addEventListener('play', function(e){
@@ -30,6 +30,7 @@ socket.on('play', function(e){
     //
     animId = e.mode;
     audioPath = e.path;
+    currentPhase = e.phase;
 
     
 

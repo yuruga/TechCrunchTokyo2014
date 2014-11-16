@@ -28,7 +28,7 @@ button {
     }
     function next(){
         $.ajax({
-             url:'http://'+ location.hostname +':8080/api/1/next',
+             url:'http://'+ location.hostname +':8080/api/1/next_hard',
              dataType: 'jsonp',
              success:function(json){
                  console.log("Success");

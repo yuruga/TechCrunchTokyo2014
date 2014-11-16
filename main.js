@@ -147,22 +147,28 @@ var os = require("os");
  */
 var ws = new WavSocket(8100);
 
-function nextScene(){
+function nextScene(phase){
+    if(!phase) phase = 0;
     if(Settings.phase < Settings.scene.length){
-        var obj = Settings.scene[Settings.phase++];
-        if(obj.man.indexOf(MAN1) > -1){
-            console.log("MAN1", obj);
-            Settings.queue.push(obj);
-        }
-        if(obj.man.indexOf(MAN2) > -1){
-            console.log("MAN2", obj);
-            var v = new Voice();
-            v.setText(obj.text);
-            var soundUri = "/wav/read_" + (new Date()).getTime().toString() + ".wav";
-            v.getAndWriteData(__dirname + "/www" + soundUri, function(path){
-                obj.path = soundUri;
-                ws.emmitPlay(obj);
-            });
+        if(phase >= Settings.phase - 1){
+            var obj = Settings.scene[Settings.phase];
+            obj.phase = Settings.phase;
+            if(obj.man.indexOf(MAN1) > -1){
+                console.log("MAN1", obj);
+                Settings.queue.push(obj);
+            }
+            if(obj.man.indexOf(MAN2) > -1){
+                console.log("MAN2", obj);
+                var v = new Voice();
+                v.setText(obj.text);
+                v.setSpeaker(Voice.speaker.BEAR);
+                var soundUri = "/wav/read_" + (new Date()).getTime().toString() + ".wav";
+                v.getAndWriteData(__dirname + "/www" + soundUri, function(path){
+                    obj.path = soundUri;
+                    ws.emmitPlay(obj);
+                });
+            }
+            Settings.phase++;
         }
     }
 };
@@ -174,8 +180,8 @@ function nextScene(){
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
 	var urlinfo = require('url').parse( req.url , true );
-    ws.setCallBack(function(){
-        nextScene();
+    ws.setCallBack(function(phase){
+        nextScene(phase);
     });
 	switch(urlinfo.pathname){
 //		case '/read':
@@ -205,13 +211,18 @@ http.createServer(function (req, res) {
             res.end(JSON.stringify(obj));
             break;
         case '/api/1/next':
-            nextScene();
-            res.end('next');
+            var phase = urlinfo.query.p;
+            nextScene(phase);
+            res.end('["next"]');
+            break;
+        case '/api/1/next_hard':
+            nextScene(Settings.phase);
+            res.end('["next_hard"]');
             break;
         case '/api/1/reset':
             Settings.phase = 0;
             Settings.queue = [];
-            res.end('reset');
+            res.end('["reset"]');
             break;
         case '/api/1/news_queue':
             var keyword = urlinfo.query.w;
