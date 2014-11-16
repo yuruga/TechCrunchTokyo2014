@@ -10,122 +10,142 @@ var Settings = {
             man: [MAN1],
             mode: 0,
             type: 1,
-            text: "わー こんばんはー"
+            text: "わー こんばんはー",
+            phase: -1
         },
         {
             man: [MAN1],
             mode: 0,
             type: 1,
-            text: "僕達ペッパーズでーす　宜しくお願いしまーす！"
+            text: "僕達ペッパーズでーす　宜しくお願いしまーす！",
+            phase: -1
         },
         {
             man: [MAN1],
             mode: 0,
             type: 1,
-            text: "僕が可愛いおちゃめなペッパーで　横にいるやらしそうなクマがガーリックです。"
+            text: "僕が可愛いおちゃめなペッパーで　横にいるやらしそうなクマがガーリックです。",
+            phase: -1
         },
         {
             man: [MAN2],
             mode: 1,
             type: 1,
-            text: "おい　ペッパー"
+            text: "おい　ペッパー",
+            phase: -1
         },
         {
             man: [MAN1],
             mode: 0,
             type: 1,
-            text: "実はさー昨日僕達ハッカソンに参加してきたんだよね"
+            text: "実はさー昨日僕達ハッカソンに参加してきたんだよね",
+            phase: -1
         },
         {
             man: [MAN2],
             mode: 3,
             type: 1,
-            text: "マジでしんどかったわ。朝5時くらいのみんなの死んだサケのような目忘れられないわー　"
+            text: "マジでしんどかったわ。朝5時くらいのみんなの死んだサケのような目忘れられないわー　",
+            phase: -1
         },
         {
             man: [MAN1],
             mode: 0,
             type: 1,
-            text: "みんな充血してこんな目だったよね！"
+            text: "みんな充血してこんな目だったよね！",
+            phase: -1
         },
         {
             man: [MAN1],
             mode: 0,
             type: 1,
-            text: "そういえばガーリック何作ったの？"
+            text: "そういえばガーリック何作ったの？",
+            phase: -1
         },
         {
             man: [MAN2],
             mode: 0,
             type: 1,
-            text: "離婚を再開発して　簡単に離婚できるような仕組み作ったよー　俺バツ３だから前からそうしたかったんだよね"
+            text: "離婚を再開発して　簡単に離婚できるような仕組み作ったよー　俺バツ３だから前からそうしたかったんだよね",
+            phase: -1
         },
         {
             man: [MAN1],
             mode: 0,
             type: 1,
-            text: "イノベーションやわー"
+            text: "イノベーションやわー",
+            phase: -1
         },
         {
             man: [MAN2],
             mode: 0,
             type: 1,
-            text: "そういうペッパーは何作ったの？"
+            text: "そういうペッパーは何作ったの？",
+            phase: -1
         },
         {
             man: [MAN1],
             mode: 0,
             type: 1,
-            text: "僕　自分を再開発して　朝日新聞の記事を自由に操れるようになったんだよ。今自慢してもいい？"
+            text: "僕　自分を再開発して　朝日新聞の記事を自由に操れるようになったんだよ。今自慢してもいい？",
+            phase: -1
         },
         {
             man: [MAN2],
             mode: 0,
             type: 1,
-            text: "マジか　せっかくだから会場の人に興味ある記事選んでもらえば？"
+            text: "マジか　せっかくだから会場の人に興味ある記事選んでもらえば？",
+            phase: -1
         },
         {
             man: [MAN1],
             mode: 0,
             type: 1,
-            text: "それ、いいね。　会場のどなたか選んでください。"
+            text: "それ、いいね。　会場のどなたか選んでください。",
+            phase: -1
         },
         {
             man: [MAN1],
             mode: 1,
             type: 1,
-            text: ""
+            text: "",
+            phase: -1
         },
         {
             man: [MAN2],
             mode: 1,
             type: 1,
-            text: "はえーよ！"
+            text: "はえーよ！",
+            phase: -1
         },
         {
             man: [MAN1],
             mode: 0,
             type: 1,
-            text: "なんでやねん！　イノベーションやろ"
+            text: "なんでやねん！　イノベーションやろ",
+            phase: -1
         },
         {
             man: [MAN2],
             mode: 0,
             type: 1,
-            text: "ところで来年もハッカソン参加したいと思う？"
+            text: "ところで来年もハッカソン参加したいと思う？",
+            phase: -1
         },
         {
             man: [MAN1],
             mode: 0,
             type: 1,
-            text: "来年は、足を再開発してマラソンの完走を目指しているから無理かなー"
+            text: "来年は、足を再開発してマラソンの完走を目指しているから無理かなー",
+            phase: -1
         }
     ],
     news: {
         man: [MAN1],
         mode: 0,
         type: 1,
-        text: ""
+        text: "",
+        phase: -1
     },
     queue: []
 }
@@ -201,7 +221,8 @@ http.createServer(function (req, res) {
                 man: [MAN1],
                 mode: -1,
                 type: 1,
-                text: ""
+                text: "",
+                phase: -1
             }
             if(Settings.queue.length > 0){
                 obj = Settings.queue.shift();
